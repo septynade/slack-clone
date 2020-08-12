@@ -23,6 +23,7 @@ export class Channels extends Component {
     channelDetails: '',
     channelsRef: firebase.database().ref('channels'),
     messagesRef: firebase.database().ref('messages'),
+    typingRef: firebase.database().ref('typing'),
     modal: false,
     notifications: [],
     firstLoad: true,
@@ -177,6 +178,10 @@ export class Channels extends Component {
     this.props.setPrivateChannel(false)
     this.setState({ channel })
     this.clearNotifications()
+    this.state.typingRef
+      .child(this.state.channel.id)
+      .child(this.state.user.uid)
+      .remove()
   }
 
   clearNotifications = () => {
