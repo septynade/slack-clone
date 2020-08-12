@@ -84,6 +84,12 @@ export class MessageForm extends Component {
     }
   }
 
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.sendMessage()
+    }
+  }
+
   getPath = () => {
     if (this.props.isPrivateChannel) {
       return `chat/private-${this.state.channel.id}`
@@ -177,6 +183,7 @@ export class MessageForm extends Component {
           placeholder='Write your message'
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
+          onKeyPress={this.handleKeyPress}
           value={message}
           className={
             errors.some((error) => error.message.includes('message'))
